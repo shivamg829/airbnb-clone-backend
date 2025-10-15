@@ -5,8 +5,9 @@ const path = require('path');
 const userRouter = require("./routes/user.router")
 const {hostRouter} = require("./routes/host.router")
 const rootDir = require('./utils/pathUtils')
-
 const app = express();
+const controller404 = require('./controllers/404.controller')
+
 app.set('view engine', 'ejs');
 app.set('views','views');
 
@@ -23,12 +24,7 @@ app.use("/host",hostRouter);
 // css 
 app.use(express.static(path.join(rootDir,'public')))
 // 404 handler
-app.use((req, res) => {
-        res.render('404', {  
-        pageTitle: '404' ,
-        currPage: '404' 
-    });
-});
+app.use(controller404.use404);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

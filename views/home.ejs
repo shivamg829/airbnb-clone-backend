@@ -3,7 +3,6 @@
     <%- include('partials/header') %>
     
     <main class="container mx-auto px-4 py-8 max-w-7xl">
-      <!-- Hero Section -->
       <div class="text-center mb-12">
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
           Discover Your Dream <span class="text-red-500">Home</span>
@@ -13,7 +12,6 @@
         </p>
       </div>
 
-      <!-- Stats Bar -->
       <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
           <div>
@@ -41,12 +39,10 @@
         </div>
       </div>
 
-      <!-- Homes Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
         <% registeredHomes.forEach(home => { %>
           <div class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden border border-gray-100">
             
-            <!-- Image with Overlay -->
             <div class="relative h-56 md:h-64 overflow-hidden">
               <% if (home.photoUrl) { %>
                 <img 
@@ -61,15 +57,12 @@
                   </svg>
                 </div>
               <% } %>
-              
-              <!-- Premium Badge -->
               <% if (home.rating >= 4.5) { %>
                 <div class="absolute top-4 left-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
                   ⭐ PREMIUM
                 </div>
               <% } %>
               
-              <!-- Rating Badge -->
               <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-2xl px-3 py-2 shadow-lg">
                 <div class="flex items-center gap-1">
                   <svg class="w-4 h-4 text-yellow-500 fill-current" viewBox="0 0 20 20">
@@ -78,20 +71,16 @@
                   <span class="text-sm font-bold text-gray-800"><%= home.rating %></span>
                 </div>
               </div>
-
-              <!-- Price Overlay -->
               <div class="absolute bottom-4 left-4 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 rounded-2xl shadow-xl">
                 <div class="text-lg font-bold">RS<%= home.price %></div>
                 <div class="text-xs opacity-90">per month</div>
               </div>
             </div>
 
-            <!-- Content Section -->
             <div class="p-5 md:p-6">
-              <!-- House Name -->
+
               <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-2 line-clamp-1"><%= home.houseName %></h3>
               
-              <!-- Location -->
               <div class="flex items-center gap-2 text-gray-600 mb-4">
                 <svg class="w-4 h-4 text-red-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
@@ -99,7 +88,6 @@
                 <span class="text-sm md:text-base truncate"><%= home.location %></span>
               </div>
 
-              <!-- Action Button -->
               <button class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center justify-center gap-2 group/btn">
                 <span>View Details</span>
                 <svg class="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -111,7 +99,6 @@
         <% }) %>
       </div>
 
-      <!-- Empty State -->
       <% if (registeredHomes.length === 0) { %>
         <div class="text-center py-16 md:py-24">
           <div class="bg-gradient-to-br from-red-50 to-red-100 w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -130,13 +117,11 @@
       <% } %>
     </main>
 
-    <!-- Add this to your CSS for line-clamp utility -->
     <style>
       .line-clamp-1 {
         overflow: hidden;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
       }
     </style>
   </body>
