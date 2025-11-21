@@ -1,12 +1,70 @@
-<header class="bg-red-500 text-white p-4 shadow-md">
-  <nav class="container mx-auto flex justify-between items-center">
-    <ul class="flex space-x-4">
-      <li>
-        <a class="<%= currPage === 'Home' ? 'bg-red-400' : 'hover:bg-red-400' %> py-2 px-4 rounded transition duration-300" href="/">Home</a>
-      </li>
-      <li>
-        <a class="<%= currPage === 'Add Home' ? 'bg-red-400' : 'hover:bg-red-400' %> hover:bg-red-400 py-2 px-4 rounded transition duration-300" href="/host/add-home">Add Home</a>
-      </li>
-    </ul>
-  </nav>
+<header class="bg-red-600 text-white p-4 shadow-xl sticky top-0 z-50">
+    <nav class="container mx-auto flex justify-between items-center">
+        <a href="/" class="text-2xl font-extrabold tracking-tight hover:text-red-200 transition duration-300">
+            AirBnB Clone
+        </a>
+        <button id="menu-toggle" class="md:hidden text-3xl focus:outline-none">
+            ☰
+        </button>
+        <div class="hidden md:flex space-x-2">
+            <ul class="flex space-x-2">
+                <% if (isLoggedIn) { %>
+                <li>
+                    <a class="<%= currPage === 'home' ? 'bg-red-700' : 'hover:bg-red-500' %> py-2 px-4 rounded-full transition font-medium" href="/homes">Homes</a>
+                </li>
+                <li>
+                    <a class="<%= currPage === 'bookings' ? 'bg-red-700' : 'hover:bg-red-500' %> py-2 px-4 rounded-full transition font-medium" href="/bookings">Bookings</a>
+                </li>
+                <li>
+                    <a class="<%= currPage === 'favouritelist' ? 'bg-red-700' : 'hover:bg-red-500' %> py-2 px-4 rounded-full transition font-medium" href="/favouritelist">Favourites</a>
+                </li>
+                <li>
+                    <a class="<%= currPage === 'hosthome' ? 'bg-red-700' : 'hover:bg-red-500' %> py-2 px-4 rounded-full transition font-medium" href="/host/hosthomelist">Host Listings</a>
+                </li>
+                <li>
+                    <a class="<%= currPage === 'Add Home' ? 'bg-red-700' : 'hover:bg-red-500' %> py-2 px-4 rounded-full transition font-medium" href="/host/add-home">Add Home</a>
+                </li>
+                <% } %>
+            </ul>
+        </div>
+
+        <!-- Desktop Right -->
+        <div class="hidden md:flex space-x-3 items-center">
+            <% if (!isLoggedIn) { %>
+            <a class="py-2 px-4 rounded-full transition font-semibold hover:bg-red-500" href="/login">Login</a>
+            <a class="py-2 px-4 rounded-full bg-white text-red-600 hover:bg-red-100 border transition font-semibold" href="/signup">Sign Up</a>
+            <% } else { %>
+            <form action="/logout" method="POST" class="inline">
+                <button type="submit" class="py-2 px-4 rounded-full font-semibold hover:bg-red-500 transition">Logout</button>
+            </form>
+            <% } %>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu (All your options included) -->
+    <div id="mobile-menu" class="hidden bg-red-700 p-4 md:hidden space-y-2">
+
+        <% if (isLoggedIn) { %>
+        <a href="/homes" class="block py-2 px-3 rounded-lg hover:bg-red-600 transition">Homes</a>
+        <a href="/bookings" class="block py-2 px-3 rounded-lg hover:bg-red-600 transition">Bookings</a>
+        <a href="/favouritelist" class="block py-2 px-3 rounded-lg hover:bg-red-600 transition">Favourites</a>
+        <a href="/host/hosthomelist" class="block py-2 px-3 rounded-lg hover:bg-red-600 transition">Host Listings</a>
+        <a href="/host/add-home" class="block py-2 px-3 rounded-lg hover:bg-red-600 transition">Add Home</a>
+
+        <form action="/logout" method="POST">
+            <button class="w-full text-left py-2 px-3 rounded-lg hover:bg-red-600 transition">Logout</button>
+        </form>
+
+        <% } else { %>
+        <a href="/login" class="block py-2 px-3 rounded-lg hover:bg-red-600 transition">Login</a>
+        <a href="/signup" class="block py-2 px-3 rounded-lg bg-white text-red-700 hover:bg-red-100 transition">Sign Up</a>
+        <% } %>
+
+    </div>
 </header>
+
+<script>
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+</script>

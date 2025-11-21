@@ -49,3 +49,7 @@ package-lock.json
 # Optional: ignore test output or temp files
 test-output/
 temp/
+
+
+
+.env

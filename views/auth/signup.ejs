@@ -1,0 +1,87 @@
+<%- include('../partials/head') %>
+<body>
+  <%- include('../partials/header') %>
+
+  <main class="flex items-center justify-center min-h-screen bg-gray-50 py-8">
+    <div class="bg-white rounded-lg shadow-md p-8 w-full max-w-lg">
+
+      <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">Create Account</h1>
+
+      <% if (errors.length > 0) { %>
+        <div class="bg-red-100 text-red-700 p-4 rounded-lg mb-4">
+          <ul class="list-disc list-inside">
+            <% errors.forEach(err => { %>
+              <li><%= err.msg %></li>
+            <% }); %>
+          </ul>
+        </div>
+      <% } %>
+
+      <form action="/signup" method="POST" class="space-y-6">
+
+        <div class="flex space-x-4">
+          <div class="space-y-2 flex-1">
+            <label class="block text-sm font-medium text-gray-700">First Name</label>
+            <input type="text" name="firstName" value="<%= oldInput.firstName || '' %>" class="w-full px-4 py-3 border rounded-lg" />
+            <p class="text-red-500 text-sm"><%= errors.find(e => e.param === 'firstName')?.msg %></p>
+          </div>
+
+          <div class="space-y-2 flex-1">
+            <label class="block text-sm font-medium text-gray-700">Last Name</label>
+            <input type="text" name="lastName" value="<%= oldInput.lastName || '' %>" class="w-full px-4 py-3 border rounded-lg" />
+            <p class="text-red-500 text-sm"><%= errors.find(e => e.param === 'lastName')?.msg %></p>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" name="email" value="<%= oldInput.email || '' %>" class="w-full px-4 py-3 border rounded-lg" />
+          <p class="text-red-500 text-sm"><%= errors.find(e => e.param === 'email')?.msg %></p>
+        </div>
+
+        <div class="flex space-x-4">
+          <div class="space-y-2 flex-1">
+            <label class="block text-sm font-medium text-gray-700">Password</label>
+            <input type="password" name="password" class="w-full px-4 py-3 border rounded-lg" />
+            <p class="text-red-500 text-sm"><%= errors.find(e => e.param === 'password')?.msg %></p>
+          </div>
+
+          <div class="space-y-2 flex-1">
+            <label class="block text-sm font-medium text-gray-700">Confirm Password</label>
+            <input type="password" name="confirmPassword" class="w-full px-4 py-3 border rounded-lg" />
+            <p class="text-red-500 text-sm"><%= errors.find(e => e.param === 'confirmPassword')?.msg %></p>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <legend class="block text-sm font-medium text-gray-700">Account Type</legend>
+
+          <div class="flex space-x-6">
+            <div class="flex items-center">
+              <input type="radio" name="userType" value="guest" <%= oldInput.userType === 'guest' || !oldInput.userType ? 'checked' : '' %> />
+              <label class="ml-2">Guest</label>
+            </div>
+
+            <div class="flex items-center">
+              <input type="radio" name="userType" value="host" <%= oldInput.userType === 'host' ? 'checked' : '' %> />
+              <label class="ml-2">Host</label>
+            </div>
+          </div>
+
+          <p class="text-red-500 text-sm"><%= errors.find(e => e.param === 'userType')?.msg %></p>
+        </div>
+
+        <div class="flex items-start">
+          <input type="checkbox" name="terms" <%= oldInput.terms ? 'checked' : '' %> class="h-4 w-4" />
+          <label class="ml-3 text-sm">I agree to the Terms and Conditions</label>
+        </div>
+
+        <p class="text-red-500 text-sm"><%= errors.find(e => e.param === 'terms')?.msg %></p>
+
+        <button class="w-full bg-red-600 text-white py-3 rounded-xl">Sign Up</button>
+      </form>
+
+    </div>
+  </main>
+</body>
+</html>
